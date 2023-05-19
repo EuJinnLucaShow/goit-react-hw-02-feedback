@@ -1,21 +1,38 @@
 import React, { Component } from "react";
-import { StyledDiv, StyledSpan, StyledButton } from './Counter.styled'
+import { Div, Span, Button } from './Counter.styled'
 
 
 class Counter extends Component {
   static defaultProps = {
     step: 1,
+    initialValue: 0,
   };
+
+constructor() {
+    super();
+    this.handleIncrement = this.handleIncrement.bind(this);
+    this.handleDecrement = this.handleDecrement.bind(this);
+  }
+
+handleIncrement = evt => {
+    console.log("Increment button was clicked!", evt); // працює
+    
+  }
+
+  handleDecrement = evt => {
+    console.log("Decrement button was clicked!", evt); // працює
+    
+  }
 
   render() {
     const { step } = this.props;
 
     return (
-      <StyledDiv>
-        <StyledSpan>0</StyledSpan>
-        <StyledButton type="button">Increment by {step}</StyledButton>
-        <StyledButton type="button">Decrement by {step}</StyledButton>
-      </StyledDiv>
+      <Div>
+        <Span>0</Span>
+        <Button type="button" onClick={this.handleIncrement} >Increment by {step}</Button>
+        <Button type="button" onClick={this.handleDecrement} >Decrement by {step}</Button>
+      </Div>
     );
   }
 }

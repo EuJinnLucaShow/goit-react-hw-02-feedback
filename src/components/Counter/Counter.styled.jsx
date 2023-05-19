@@ -1,21 +1,23 @@
 import styled from 'styled-components';
 
-export const StyledDiv = styled.div`
+export const Div = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 ` 
 
-export const StyledSpan = styled.span`
+export const Span = styled.span`
   font-size: 24px;
   font-weight: bold;
   margin-right: 10px;
 `
 
-export const StyledButton = styled.button`
- padding: 5px 10px;
-  background-color: #f0f0f0;
-  border: none;
+export const Button = styled.button`
+  color: #666666;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid #666666;
   border-radius: 3px;
   cursor: pointer;
  :hover {
