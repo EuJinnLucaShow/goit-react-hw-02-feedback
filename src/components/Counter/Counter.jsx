@@ -1,35 +1,41 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
-class Counter extends Component {
+export default class Counter extends Component {
+
   state = {
-    value: 0
+      good: 0,
+      neutral: 0,
+      bad: 0,      
   };
 
-  handleIncrement = () => {
-    this.setState((prevState) => ({
-      value: prevState.value + 1
-    }));
+  handleGood = () => {
+    this.setState({
+      good: this.state.good + 1
+    });
   };
 
-  handleDecrement = () => {
-    this.setState((prevState) => ({
-      value: prevState.value - 1
-    }));
+  handleNeutral = () => {
+  this.setState({
+      neutral: this.state.neutral + 1
+    });
+  };
+
+    handleBad = () => {
+  this.setState({
+      bad: this.state.bad + 1
+    });
   };
 
   render() {
     return (
-      <div>
-        <span>{this.state.value}</span>
-        <button type="button" onClick={this.handleIncrement}>
-          Increment by 1
-        </button>
-        <button type="button" onClick={this.handleDecrement}>
-          Decrement by 1
-        </button>
-      </div>
+      <>        
+        <button type="button" onClick={this.handleGood}>Good</button>
+        <button type="button" onClick={this.handleNeutral}>Neutral</button>
+        <button type="button" onClick={this.handleBad}>Bad</button>
+        <p>{this.state.good}</p>
+        <p>{this.state.neutral}</p>
+        <p>{this.state.bad}</p>
+      </>
     );
   }
 }
-
-export default Counter;
