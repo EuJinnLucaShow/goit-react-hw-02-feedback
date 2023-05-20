@@ -1,39 +1,35 @@
-import React, { useState } from 'react';
+import React, { Component } from "react";
 
-function Counter() {
-  const [state, setState] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
-    total: 0,
-    percentage: 0
-  });
+class Counter extends Component {
+  state = {
+    value: 0
+  };
 
-  const handleFeedback = (type) => {
-    setState((prevState) => ({
-      ...prevState,
-      [type]: prevState[type] + 1,
-      total: prevState.total + 1,
-      percentage: Math.round((prevState.good / prevState.total) * 100)
+  handleIncrement = () => {
+    this.setState((prevState) => ({
+      value: prevState.value + 1
     }));
   };
 
-  return (
-    <div>
-      <h1>Please leave feedback</h1>
-      <button onClick={() => handleFeedback('good')}>Good</button>
-      <button onClick={() => handleFeedback('neutral')}>Neutral</button>
-      <button onClick={() => handleFeedback('bad')}>Bad</button>
+  handleDecrement = () => {
+    this.setState((prevState) => ({
+      value: prevState.value - 1
+    }));
+  };
+
+  render() {
+    return (
       <div>
-        <h2>Feedback Statistics</h2>
-        <p>Good: {state.good}</p>
-        <p>Neutral: {state.neutral}</p>
-        <p>Bad: {state.bad}</p>
-        <p>Total: {state.total}</p>
-        <p>Percentage: {state.percentage}%</p>
+        <span>{this.state.value}</span>
+        <button type="button" onClick={this.handleIncrement}>
+          Increment by 1
+        </button>
+        <button type="button" onClick={this.handleDecrement}>
+          Decrement by 1
+        </button>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Counter;
