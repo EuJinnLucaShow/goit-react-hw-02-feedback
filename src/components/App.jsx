@@ -35,7 +35,7 @@ function App() {
 
   return (
     <AppContainer>
-      <Section title="Review Widget ☕️">
+      <Section title="Review Widget 📝">
         <FeedbackOptions
           options={['good', 'neutral', 'bad']}
           onLeaveFeedback={handleButtonClick}
