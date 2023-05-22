@@ -6,7 +6,7 @@ export const Div = styled.div`
   justify-content: center;
 ` 
 
-export const Span = styled.span`
+export const Title = styled.p`
   font-size: 24px;
   font-weight: bold;
   margin-right: 10px;
