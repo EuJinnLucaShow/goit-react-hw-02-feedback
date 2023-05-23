@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Statistics from './Statistics/Statistics';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Section from './Section/Section';
+import Notification from './Notification/Notification'
 import { AppContainer } from './App.styled'
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
 
       <Section title="Statistics 📊">
         {totalFeedback === 0 ? (
-          <p>There is no feedback</p>
+          <Notification message="There is no feedback" />
         ) : (
           <Statistics
             good={good}
