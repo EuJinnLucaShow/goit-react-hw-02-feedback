@@ -1,64 +1,68 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import Statistics from './Statistics/Statistics';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Section from './Section/Section';
-import Notification from './Notification/Notification'
-import { AppContainer } from './App.styled'
+import Notification from './Notification/Notification';
+import { AppContainer } from './App.styled';
 
-function App() {
-  const [state, setState] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0
-  });
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      good: 0,
+      neutral: 0,
+      bad: 0
+    };
+  }
 
-  const handleButtonClick = (type) => {
-    setState(prevState => ({
+  handleButtonClick = (type) => {
+    this.setState((prevState) => ({
       ...prevState,
       [type]: prevState[type] + 1
     }));
   };
 
-  const countTotalFeedback = () => {
-    const { good, neutral, bad } = state;
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
     return good + neutral + bad;
   };
 
-  const countPositiveFeedbackPercentage = () => {
-    const { good } = state;
-    const total = countTotalFeedback();
+  countPositiveFeedbackPercentage = () => {
+    const { good } = this.state;
+    const total = this.countTotalFeedback();
     return total === 0 ? 0 : Math.round((good / total) * 100);
   };
 
-  const { good, neutral, bad } = state;
-  const totalFeedback = countTotalFeedback();
-  const positiveFeedbackPercentage = countPositiveFeedbackPercentage();
+  render() {
+    const { good, neutral, bad } = this.state;
+    const totalFeedback = this.countTotalFeedback();
+    const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
 
-  return (
-    <AppContainer>
-      <Section title="Review Widget 📝">
-        <FeedbackOptions
-          options={['good', 'neutral', 'bad']}
-          onLeaveFeedback={handleButtonClick}
-        />
-      </Section>
-
-      <Section title="Statistics 📊">
-        {totalFeedback === 0 ? (
-          <Notification message="There is no feedback" />
-        ) : (
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={totalFeedback}
-            positivePercentage={positiveFeedbackPercentage}
+    return (
+      <AppContainer>
+        <Section title="Review Widget 📝">
+          <FeedbackOptions
+            options={['good', 'neutral', 'bad']}
+            onLeaveFeedback={this.handleButtonClick}
           />
-        )}
-      </Section>
-    </AppContainer>
-  );
+        </Section>
+
+        <Section title="Statistics 📊">
+          {totalFeedback === 0 ? (
+            <Notification message="There is no feedback" />
+          ) : (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={totalFeedback}
+              positivePercentage={positiveFeedbackPercentage}
+            />
+          )}
+        </Section>
+      </AppContainer>
+    );
+  }
 }
 
 export default App;
-
