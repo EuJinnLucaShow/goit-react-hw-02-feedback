@@ -6,14 +6,13 @@ import Notification from './Notification/Notification';
 import { AppContainer } from './App.styled';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+
+state = {
       good: 0,
       neutral: 0,
       bad: 0
     };
-  }
+
 
   handleButtonClick = (type) => {
     this.setState((prevState) => ({
@@ -37,31 +36,35 @@ class App extends Component {
     const { good, neutral, bad } = this.state;
     const totalFeedback = this.countTotalFeedback();
     const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
+    let feedbackContent;
 
-    return (
-      <AppContainer>
-        <Section title="Review Widget 📝">
-          <FeedbackOptions
-            options={['good', 'neutral', 'bad']}
-            onLeaveFeedback={this.handleButtonClick}
-          />
-        </Section>
+if (totalFeedback === 0) {
+  feedbackContent = <Notification message="There is no feedback" />;
+} else {
+  feedbackContent = (
+    <Statistics
+      good={good}
+      neutral={neutral}
+      bad={bad}
+      total={totalFeedback}
+      positivePercentage={positiveFeedbackPercentage}
+    />
+  );
+}
 
-        <Section title="Statistics 📊">
-          {totalFeedback === 0 ? (
-            <Notification message="There is no feedback" />
-          ) : (
-            <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={totalFeedback}
-              positivePercentage={positiveFeedbackPercentage}
-            />
-          )}
-        </Section>
-      </AppContainer>
-    );
+return (
+  <AppContainer>
+    <Section title="Review Widget 📝">
+      <FeedbackOptions
+        options={['good', 'neutral', 'bad']}
+        onLeaveFeedback={this.handleButtonClick}
+      />
+    </Section>
+
+    <Section title="Statistics 📊">{feedbackContent}</Section>
+  </AppContainer>
+);
+
   }
 }
 
